@@ -1,0 +1,12 @@
+---
+title: "Statistical Computing Assignment 2"
+---
+
+## Welcome
+
+This website contains my answers for Assignment 2. The bar on the left can be used to locate my solutions to the Parallel Computing Practical.
+
+### Student Details
+* **Name:** Nandi Malinga
+* **Student ID:** MLNNAN007
+* **Submission Date:** 4 March 2026
