@@ -1,0 +1,62 @@
+[
+  {
+    "objectID": "Parallel-Computing.html",
+    "href": "Parallel-Computing.html",
+    "title": "Parallel Computing Practical",
+    "section": "",
+    "text": "library(MASS)\nlibrary(doParallel)\nlibrary(foreach)",
+    "crumbs": [
+      "Parallel Computing"
+    ]
+  },
+  {
+    "objectID": "Parallel-Computing.html#parallel-processing",
+    "href": "Parallel-Computing.html#parallel-processing",
+    "title": "Parallel Computing Practical",
+    "section": "Parallel processing",
+    "text": "Parallel processing\n\nSingle bootstrap sample\n\nlibrary(doParallel)\n\ngal &lt;- galaxies\nn &lt;- length(gal)\n\nc1 &lt;- makeCluster(2)\nregisterDoParallel(c1)\n\nsystem.time( {\n  result_parallel &lt;- foreach(i = 1:1000, .combine = c) %dopar% {\n  samp &lt;- sample(gal, n, replace = TRUE)\n  med &lt;- median(samp)\n  }\n})\n\n   user  system elapsed \n   0.19    0.03    0.32 \n\n\n\nstopCluster(c1)\n\n\n\n1000 bootstrap samples\n\nc2 &lt;- makeCluster(2)\nregisterDoParallel(c2)\n\nsystem.time( {\n  results_large_p &lt;- foreach(i = 1:100, .combine = c) %dopar% {\n  vec &lt;- numeric(1000)\n  \n  for (j in 1:1000) {\n    s &lt;- sample(gal, n, replace = TRUE)\n    vec[j] &lt;- median(s)\n  }\n  \n  }\n})\n\n   user  system elapsed \n   0.08    0.00    2.47 \n\n\n\nstopCluster(c2)",
+    "crumbs": [
+      "Parallel Computing"
+    ]
+  },
+  {
+    "objectID": "Parallel-Computing.html#serial-processing",
+    "href": "Parallel-Computing.html#serial-processing",
+    "title": "Parallel Computing Practical",
+    "section": "Serial processing",
+    "text": "Serial processing\n\nSingle bootstrap sample\n\nsystem.time( {\n  result_serial &lt;- foreach(i = 1:1000, .combine = c) %do% {\n    boot_samp &lt;- sample(gal, n, replace = TRUE)\n    med_samp &lt;- median(boot_samp)\n  }\n})\n\n   user  system elapsed \n   0.22    0.02    0.23 \n\n\n\n\n1000 bootstrap samples\n\nsystem.time( {\n  results_large_s &lt;- foreach(i = 1:100, .combine = c) %do% {\n  vec &lt;- numeric(1000)\n  \n  for (j in 1:1000) {\n    s &lt;- sample(gal, n, replace = TRUE)\n    vec[j] &lt;- median(s)\n  }\n  \n  }\n})\n\n   user  system elapsed \n   4.51    0.11    4.61 \n\n\nFrom the results above, we see that the total run time for parallel processing is higher than for serial processing. However, with larger chunks we can see that using a parallel approach significantly decreases the processing time, thereby improving efficiency compared to serial processing.",
+    "crumbs": [
+      "Parallel Computing"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistical Computing Assignment 2",
+    "section": "",
+    "text": "This website contains my answers for Assignment 2. The bar on the top can be used to locate the Parallel Computing Practical.\n\n\n\nName: Nandi Malinga\nStudent ID: MLNNAN007\nSubmission Date: 4 March 2026",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Statistical Computing Assignment 2",
+    "section": "",
+    "text": "This website contains my answers for Assignment 2. The bar on the top can be used to locate the Parallel Computing Practical.\n\n\n\nName: Nandi Malinga\nStudent ID: MLNNAN007\nSubmission Date: 4 March 2026",
+    "crumbs": [
+      "Home"
+    ]
+  }
+]
